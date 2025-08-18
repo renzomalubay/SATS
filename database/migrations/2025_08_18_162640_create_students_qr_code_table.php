@@ -11,15 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('students_qr_code', function (Blueprint $table) {
+        Schema::create('students_qr_codes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('student_id')->constrained('students')->onDelete('cascade');
             $table->longText('qr_code')->nullable();
             $table->timestamps();
-        });
-
-        Schema::table('students', function (Blueprint $table) {
-            $table->dropColumn('qr_code'); // Remove the old QR code column
         });
     }
 
