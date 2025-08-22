@@ -13,8 +13,8 @@ class StudentController extends Controller
     public function index()
     {
         //
-        $students = Student::all();
-        
+        $students = Student::with('qrCode')->get();
+
         // dd($students);
         return view('index', compact('students'));
     }

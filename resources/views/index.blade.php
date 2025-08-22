@@ -42,9 +42,12 @@
                             In a real application, you would replace this with a dynamically
                             generated QR code image URL based on student data.
                         -->
-                <img src="https://placehold.co/150x150/000/fff?text=QR+Code"
-                  alt="QR code for {{ $student->first_name }}" class="w-32 h-32 md:w-40 md:h-40 object-cover rounded">
+                <img src="{{ asset('storage/' . $student->qrCode->qr_code_path) }}"
+                  alt="QR code for {{ $student->qrCode->qr_code_path }}"
+                  class="w-32 h-32 md:w-40 md:h-40 object-cover rounded">
+                {{ asset('storage/' . $student->qrCode->qr_code_path) }}
               </div>
+
             </div>
           @endforeach
         @else

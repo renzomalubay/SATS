@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('student_id')->unique(); // Unique identifier for the student
-            $table->foreignId('qr_code_id')->constrained('students_qr_codes')->onDelete('cascade');
+            $table->foreignId('qr_code_id')->nullable()->constrained('students_qr_codes')->onDelete('cascade');
             $table->timestamps();
         });
     }
