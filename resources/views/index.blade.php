@@ -1,18 +1,7 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+@extends('layouts.app')
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Student List</title>
-  <link rel="preconnect" href="https://fonts.bunny.net">
-  <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
-  @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-
-<body class="bg-gray-100">
-
-  <div class="container mx-auto p-8 max-w-2xl bg-white shadow-xl rounded-xl mt-10">
+@section('content')
+  <div class="container mx-auto p-8 max-w-2xl bg-white shadow-xl rounded-xl mt-20">
     <h1 class="text-4xl font-bold text-gray-800 mb-8 text-center">Student List</h1>
 
     <div class="space-y-6">
@@ -78,6 +67,4 @@
       }
     });
   </script>
-</body>
-
-</html>
+@endsection

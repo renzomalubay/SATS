@@ -19,6 +19,11 @@ class StudentController extends Controller
         return view('index', compact('students'));
     }
 
+    public function scanner()
+    {
+        return view('scanner');
+    }
+
     /**
      * Show the form for creating a new resource.
      */
