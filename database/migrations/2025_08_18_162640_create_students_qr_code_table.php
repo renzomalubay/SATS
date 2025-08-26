@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('students_qr_codes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('student_id')->constrained('students')->onDelete('cascade');
-            $table->longText('qr_code_path')->nullable();
+            $table->longText('qr_code')->nullable();
             $table->timestamps();
         });
     }

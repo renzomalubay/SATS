@@ -8,8 +8,8 @@ class StudentsQrCode extends Model
 {
     protected $fillable = ['qr_code_path', 'student_id'];
 
-    public function student()
-    {
-        return $this->belongsTo(Student::class);
-    }
+    // public function student()
+    // {
+    //     return $this->belongsTo(Student::class);
+    // }
 }

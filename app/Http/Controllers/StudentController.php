@@ -15,7 +15,7 @@ class StudentController extends Controller
         //
         $students = Student::with('qrCode')->get();
 
-        // dd($students);
+        // dd($students->toArray());
         return view('index', compact('students'));
     }
 

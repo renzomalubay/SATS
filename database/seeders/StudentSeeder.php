@@ -19,44 +19,39 @@ class StudentSeeder extends Seeder
     public function run(): void
     {
         $faker = Faker::create();
+
+        // Define the number of students you want to create
         $numberOfStudents = 10;
 
+        // Loop to create a set of students and their QR codes
         for ($i = 0; $i < $numberOfStudents; $i++) {
-            // Step 1: Generate the temporary student ID and student data.
-            $studentId = $faker->unique()->randomNumber(8);
-            $firstName = $faker->firstName;
-            $lastName = $faker->lastName;
 
-            // Step 2: Create the student record first.
-            // This is the crucial change. We create the student record before the QR code.
+            // Step 1: Create the student record first.
+            // Note: We leave qr_code_id as null for now because it doesn't exist yet.
             $student = Student::create([
-                'first_name' => $firstName,
-                'last_name' => $lastName,
-                'student_id' => $studentId,
-                // The 'qr_code_id' field on the student record can be set later.
+                'first_name' => $faker->firstName,
+                'last_name' => $faker->lastName,
+                'student_id' => $faker->unique()->randomNumber(8), // Generate a unique 8-digit student ID
             ]);
 
-            // Step 3: Now we can create the QR code data using the student's ID from the newly created record.
+            // Data to be encoded in the QR code. We use the newly created student's ID.
             $qrData = json_encode([
-                'student_id' => $student->id, // Use the real ID from the new student record
+                'student_id' => $student->student_id,
+                'first_name' => $student->first_name,
+                'last_name' => $student->last_name,
             ]);
 
-            $qrCodePng = QrCode::size(250)->format('png')->generate($qrData);
-            $fileName = 'qr-' . $student->id . '.png'; // Use the real student ID for a unique filename
-            Storage::disk('public')->put($fileName, $qrCodePng);
+            // Step 2: Generate the QR code as an SVG string.
+            $qrCodeSvg = QrCode::size(250)->format('svg')->generate($qrData);
 
-            // Step 4: Create the QR code record, now with the student_id available.
+            // Step 3: Create the QR code record using the new student's ID and the generated SVG.
             $qrCodeRecord = StudentsQrCode::create([
-                'qr_code_path' => $fileName,
-                'student_id' => $student->id, // Provide the student_id value here.
+                'student_id' => $student->id,
+                'qr_code' => $qrCodeSvg,
             ]);
 
-            // $qrCodeRecord->student_id = $student->id;
-            $qrCodeRecord->save();
-
-            // Optional: Update the student record with the qr_code_id.
-            // This links the student back to the QR code.
-            $student->qr_code_id = $qrCodeRecord->id;
+            // Step 4: Update the student record with the newly created qr_code_id.
+            // $student->qr_code_id = $qrCodeRecord->id;
             $student->save();
         }
     }
