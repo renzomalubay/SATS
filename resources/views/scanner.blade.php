@@ -17,7 +17,7 @@
       Stop Scanning
     </button>
   </div>
-  <script>
+  {{-- <script>
     // Use a unique ID for the QR reader element
     const qrCodeRegionId = "reader";
     let html5QrcodeScanner;
@@ -108,5 +108,9 @@
         });
       });
     };
-  </script>
+  </script> --}}
 @endsection
+
+@push('scripts')
+  @vite('resources/views/scanner.ts')
+@endpush
