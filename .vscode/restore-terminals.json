@@ -1,0 +1,19 @@
+{
+    "artificialDelayMilliseconds": 700,
+    "keepExistingTerminalsOpen": false,
+    "runOnStartup": true,
+    "terminals": [
+        {
+            "splitTerminals": [
+                {
+                    "name": "Node",
+                    "commands": ["npm i", "npm run dev"]
+                },
+                {
+                    "name": "Laravel",
+                    "commands": ["php artisan serve"]
+                }
+            ]
+        }
+    ]
+}
